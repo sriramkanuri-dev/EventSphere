@@ -81,6 +81,8 @@ public class ActivitySelection {
                 i=j;
             }
         }
+
+        sc.close();
     }
 
     static int convert(

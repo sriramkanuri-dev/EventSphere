@@ -47,27 +47,26 @@ public class QuickSort {
     public static void main(
             String[] args){
 
-        Scanner sc=
-                new Scanner(System.in);
+        try (Scanner sc = new Scanner(System.in)) {
+            System.out.print("Events: ");
+            int n=sc.nextInt();
 
-        System.out.print("Events: ");
-        int n=sc.nextInt();
+            int[] a=
+                    new int[n];
 
-        int[] a=
-                new int[n];
+            for(int i=0;i<n;i++){
 
-        for(int i=0;i<n;i++){
+                System.out.print(
+                        "Registrations: "
+                );
 
-            System.out.print(
-                    "Registrations: "
-            );
+                a[i]=sc.nextInt();
+            }
 
-            a[i]=sc.nextInt();
+            sort(a,0,n-1);
+
+            for(int x:a)
+                System.out.println(x);
         }
-
-        sort(a,0,n-1);
-
-        for(int x:a)
-            System.out.println(x);
     }
 }

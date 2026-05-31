@@ -6,10 +6,10 @@ public class EventDateQuery {
     public static void main(String[] args)
             throws Exception {
 
-        Scanner sc = new Scanner(System.in);
+        try (Scanner sc = new Scanner(System.in)) {
 
-        TreeMap<Date,String> events =
-                new TreeMap<>();
+            TreeMap<Date,String> events =
+                    new TreeMap<>();
 
         SimpleDateFormat sdf =
                 new SimpleDateFormat("dd/MM/yyyy");
@@ -53,4 +53,5 @@ public class EventDateQuery {
             );
         }
     }
+}
 }

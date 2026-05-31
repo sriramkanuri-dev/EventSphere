@@ -1,62 +1,61 @@
 import java.util.*;
 
 public class BFSVenue {
+    public static void main(String[] args) {
 
-    public static void main(String[] args){
+        try (Scanner sc = new Scanner(System.in)) {
 
-        Scanner sc = new Scanner(System.in);
+            System.out.print("Enter number of venues: ");
+            int v = sc.nextInt();
 
-        System.out.print("Venues: ");
-        int v = sc.nextInt();
+        ArrayList<ArrayList<Integer>> g = new ArrayList<>();
 
-        ArrayList<ArrayList<Integer>>
-                g = new ArrayList<>();
-
-        for(int i=0;i<v;i++)
+        for (int i = 0; i < v; i++) {
             g.add(new ArrayList<>());
+        }
 
-        System.out.print("Connections: ");
+        System.out.print("Enter number of connections: ");
         int e = sc.nextInt();
 
-        for(int i=0;i<e;i++){
+        for (int i = 0; i < e; i++) {
 
-            System.out.print("Connect: ");
+            System.out.print("Enter connection " + (i + 1) + " (example 0 1): ");
 
             int a = sc.nextInt();
             int b = sc.nextInt();
 
-            g.get(a).add(b);
-            g.get(b).add(a);
+            if (a >= 0 && a < v && b >= 0 && b < v) {
+                g.get(a).add(b);
+                g.get(b).add(a);
+            } else {
+                System.out.println("Invalid venue number. Try again.");
+                i--;
+            }
         }
 
-        System.out.print("Start venue: ");
-        int s = sc.nextInt();
+        System.out.print("Enter starting venue: ");
+        int start = sc.nextInt();
 
-        Queue<Integer> q =
-                new LinkedList<>();
+        Queue<Integer> q = new LinkedList<>();
+        boolean[] vis = new boolean[v];
 
-        boolean[] vis =
-                new boolean[v];
+        q.add(start);
+        vis[start] = true;
 
-        q.add(s);
-        vis[s]=true;
+        System.out.println("\nAccessible Venues:");
 
-        while(!q.isEmpty()){
+        while (!q.isEmpty()) {
+            int n = q.poll();
 
-            int n=q.poll();
+            System.out.println("Venue " + n);
 
-            System.out.println(
-                    "Venue "+n
-            );
-
-            for(int x:g.get(n)){
-
-                if(!vis[x]){
-
-                    vis[x]=true;
+            for (int x : g.get(n)) {
+                if (!vis[x]) {
+                    vis[x] = true;
                     q.add(x);
                 }
             }
         }
     }
+}
 }

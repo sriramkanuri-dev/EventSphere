@@ -96,9 +96,9 @@ public class AVLTree {
 
     public static void main(String[] args) {
 
-        Scanner sc = new Scanner(System.in);
+        try (Scanner sc = new Scanner(System.in)) {
 
-        AVLTree t = new AVLTree();
+            AVLTree t = new AVLTree();
 
         System.out.print("Participants: ");
         int n = sc.nextInt();
@@ -113,4 +113,5 @@ public class AVLTree {
 
         t.inorder(t.root);
     }
+}
 }

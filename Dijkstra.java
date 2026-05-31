@@ -3,67 +3,65 @@ import java.util.*;
 public class Dijkstra {
 
     public static void main(String[] args){
+        try (Scanner sc = new Scanner(System.in)) {
+            System.out.print("Venues: ");
+            int n = sc.nextInt();
 
-        Scanner sc =
-                new Scanner(System.in);
+            int[][] g =
+                    new int[n][n];
 
-        System.out.print("Venues: ");
-        int n = sc.nextInt();
+            System.out.println(
+                    "Distance matrix:"
+            );
 
-        int[][] g =
-                new int[n][n];
+            for(int i=0;i<n;i++)
+                for(int j=0;j<n;j++)
+                    g[i][j]=sc.nextInt();
 
-        System.out.println(
-                "Distance matrix:"
-        );
+            int[] dist =
+                    new int[n];
 
-        for(int i=0;i<n;i++)
-            for(int j=0;j<n;j++)
-                g[i][j]=sc.nextInt();
+            boolean[] vis =
+                    new boolean[n];
 
-        int[] dist =
-                new int[n];
+            Arrays.fill(
+                    dist,
+                    Integer.MAX_VALUE
+            );
 
-        boolean[] vis =
-                new boolean[n];
+            dist[0]=0;
 
-        Arrays.fill(
-                dist,
-                Integer.MAX_VALUE
-        );
+            for(int c=0;c<n-1;c++){
 
-        dist[0]=0;
+                int u=-1;
 
-        for(int c=0;c<n-1;c++){
+                for(int i=0;i<n;i++){
 
-            int u=-1;
+                    if(!vis[i] &&
+                            (u==-1 ||
+                                    dist[i]
+                                            <dist[u]))
 
-            for(int i=0;i<n;i++){
+                        u=i;
+                }
 
-                if(!vis[i] &&
-                        (u==-1 ||
-                                dist[i]
-                                        <dist[u]))
+                vis[u]=true;
 
-                    u=i;
+                for(int v=0;v<n;v++){
+
+                    if(g[u][v]!=0 &&
+                            dist[u]+g[u][v]
+                                    <dist[v])
+
+                        dist[v]=
+                                dist[u]
+                                        +g[u][v];
+                }
             }
 
-            vis[u]=true;
-
-            for(int v=0;v<n;v++){
-
-                if(g[u][v]!=0 &&
-                        dist[u]+g[u][v]
-                                <dist[v])
-
-                    dist[v]=
-                            dist[u]
-                                    +g[u][v];
-            }
+            System.out.println(
+                    Arrays.toString(dist)
+            );
         }
-
-        System.out.println(
-                Arrays.toString(dist)
-        );
     }
 }
